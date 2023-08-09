@@ -5,6 +5,16 @@ import { isAdHoc } from '../variables/guard';
 
 import { getVariableWrapper } from './LegacyVariableWrapper';
 
+formatRegistry.register(
+  {
+    id: VariableFormatID.JSONWithoutQuote,
+    name: 'JSON Without Quote',
+    description: 'JSON stringify value, but the double quotation marks around it are removed.',
+    formatter: ( value ) => {
+      return JSON.stringify(value).replace(/^"|"$/g, '');
+    },
+  },)
+
 export function formatVariableValue(value: any, format?: any, variable?: any, text?: string): string {
   // for some scopedVars there is no variable
   variable = variable || {};
